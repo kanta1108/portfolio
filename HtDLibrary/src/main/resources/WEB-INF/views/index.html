@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+	
+	<head>
+		<title>HtDLibraryにようこそ</title>
+		
+		
+	</head>
+	<body>
+	
+		<!-- /* ここから、読み込ませたいコンテンツ */-->
+		<div layout:fragment="content" class="index" >
+			
+			<!-- /* エラーメッセージがmodelに設定されている場合、表示 */-->
+			<p th:unless="${#strings.isEmpty(errorMsg)}" th:text="${errorMsg}" class="errorMsg"/>
+			
+			<!-- /* 書籍検索フォーム */-->
+			<div  class="form">
+			<form th:object="${bookSearchForm}" th:action="@{/search}" method="POST">
+				<input type="text" maxlength="20" placeholder="タイトルを入力してください" th:field="*{title}" />
+				<button type="submit">検索</button>
+			</form>
+			</div>
+		</div>
+		<!-- /* ここまで、読み込ませたいコンテンツ */-->
+		
+	</body>
+</html>

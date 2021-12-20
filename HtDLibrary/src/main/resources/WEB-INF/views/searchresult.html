@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/layout}">
+	
+	<head>
+		<title>検索結果</title>
+	</head>
+	<body>
+
+		<!-- /* ここから、読み込ませたいコンテンツ */-->
+		<div layout:fragment="content" class="results">
+		<p>検索条件:<span th:text="${title}"></span></p>
+		
+			<!-- /* 検索結果が0件だった場合 */-->
+			<div th:if="${#lists.isEmpty(resultList)}">
+			
+				<p>検索結果なし</p>
+			
+			</div>
+			
+			<!-- /* 検索結果が存在する場合 */-->
+			<div class="result" th:if="${not #lists.isEmpty(resultList)}" >
+			
+			<p><span th:text="${#lists.size(resultList)}"></span>件ヒットしました</p>
+				<table>
+					<tr th:each="book, stat:${resultList}">
+						<td th:text="${stat.count}"></td>
+						<td th:text="${book.title}"></td>
+					</tr>
+				</table>
+			</div>
+			
+		</div>
+		<!-- /* ここまで、読み込ませたいコンテンツ */-->
+		
+	</body>
+</html>
